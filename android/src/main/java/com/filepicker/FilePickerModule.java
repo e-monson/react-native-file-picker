@@ -263,9 +263,11 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
 
         // DocumentProvider
         if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+            Log.d("FilePickerModule", "document");
 
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri)) {
+                Log.d("FilePickerModule", "document external");
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
@@ -278,6 +280,7 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
             }
             // DownloadsProvider
             else if (isDownloadsDocument(uri)) {
+                Log.d("FilePickerModule", "document downloads");
 
                 final String id = DocumentsContract.getDocumentId(uri);
                 final String[] split = id.split(":");
@@ -294,6 +297,7 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
             }
             // MediaProvider
             else if (isMediaDocument(uri)) {
+                Log.d("FilePickerModule", "document media");
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
@@ -317,6 +321,7 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
         }
         // MediaStore (and general)
         else if ("content".equalsIgnoreCase(uri.getScheme())) {
+            Log.d("FilePickerModule", "media store");
 
             // Return the remote address
             if (isGooglePhotosUri(uri))
@@ -326,6 +331,7 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
         }
         // File
         else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            Log.d("FilePickerModule", "something else");
             return uri.getPath();
         }
 
