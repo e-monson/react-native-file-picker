@@ -406,7 +406,7 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
                 return "error";
             }
         } catch (Exception e) {
-            //Log.d("FilePickerModule", "Error getFileFromStream");
+            Log.d("FilePickerModule", "Error getFileFromStream");
             return "error";
         }
     }
@@ -422,7 +422,7 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
     }
 
     private boolean saveFileOnCache(String path, Activity activity, Uri uri) {
-        //Log.d("FilePickerModule", "saveFileOnCache path: "+path);
+        Log.d("FilePickerModule", "saveFileOnCache path: "+path);
         try {
             InputStream is = activity.getContentResolver().openInputStream(uri);
             OutputStream stream = new BufferedOutputStream(new FileOutputStream(path));
@@ -436,11 +436,11 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
             if (stream != null)
                 stream.close();
 
-            //Log.d("FilePickerModule", "saveFileOnCache done!");
+            Log.d("FilePickerModule", "saveFileOnCache done!");
             return true;
 
         } catch (Exception e) {
-            //Log.d("FilePickerModule", "saveFileOnCache error");
+            Log.d("FilePickerModule", "saveFileOnCache error");
             return false;
         }
     }
