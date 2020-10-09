@@ -283,15 +283,19 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
                 Log.d("FilePickerModule", "document downloads");
 
                 final String id = DocumentsContract.getDocumentId(uri);
+                Log.d("FilePickerModule", "id: " + id);
                 final String[] split = id.split(":");
                 final String type = split[0];
+                Log.d("FilePickerModule", "type: " + type);
                 if ("raw".equalsIgnoreCase(type)) {
+                    Log.d("FilePickerModule", "raw: " + split[1]);
                     return split[1];
                 } else {
                     String prefix = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? "file:///" : "content://";
                     final Uri contentUri = ContentUris.withAppendedId(
                             Uri.parse(prefix + "downloads/public_downloads"), Long.valueOf(id));
-
+                    Log.d("FilePickerModule", "contentUri: " + contentUri);
+                    Log.d("FilePickerModule", "return value: " + getDataColumn(context, contentUri, null, null));
                     return getDataColumn(context, contentUri, null, null);
                 }
             }
