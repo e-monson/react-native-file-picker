@@ -198,9 +198,11 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
         try {
             WritableArray results = Arguments.createArray();
             if (uri != null) {
+                Log.d("FilePickerModule", "uri: " + uri);
                 WritableMap doc = getDataFromURI(uri);
                 mCallback.invoke(doc);
             } else if (clipData != null && clipData.getItemCount() > 0) {
+                Log.d("FilePickerModule", "clipData");
                 final int length = clipData.getItemCount();
                 for (int i = 0; i < length; ++i) {
                     ClipData.Item item = clipData.getItemAt(i);
@@ -209,6 +211,7 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
                 }
                 mCallback.invoke(results);
             } else {
+                Log.d("FilePickerModule", "Invalid data");
                 response.putString("error", "Invalid data returned by intent");
                 mCallback.invoke(response);
                 return;
@@ -228,13 +231,16 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
         String readableSize = null;
         Long size = null;
         path = getPath(currentActivity, uri);
+        Log.d("FilePickerModule", "path: " + path);
         if (path != null) {
+            Log.d("FilePickerModule", "path not null");
             map.putString("path", path);
             readableSize = getFileReadableSize(path);
             size = getFileSize(path);
             map.putString("readableSize", readableSize);
             map.putInt("size", size.intValue());
         } else {
+            Log.d("FilePickerModule", "path null");
             path = getFileFromUri(currentActivity, uri);
             if (!path.equals("error")) {
                 readableSize = getFileReadableSize(path);
